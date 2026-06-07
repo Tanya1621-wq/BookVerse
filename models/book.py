@@ -7,7 +7,7 @@ class Book:
         self.genre = genre
         self.pages = pages
 
-        def to_dict(self):
+    def to_dict(self):
             return {
                 "book_id": self.book_id,
                 "title": self.title,
@@ -16,3 +16,6 @@ class Book:
                 "genre": self.genre,
                 "pages": self.pages,
             }
+
+    def __str__(self):
+        return f"[{self.book_id}] {self.title} | {self.author_id} | {self.publish_year} | {self.genre} | born {self.pages}"

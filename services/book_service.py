@@ -27,9 +27,26 @@ class BookService:
     def find_books(self,book_id):
         book= self.bookRepository.get_by_id(book_id)
         if book is None:
-            raise LookupError(f"Bood with id {book_id} not found.")
+            raise LookupError(f"Book with id {book_id} not found.")
         return book
     
     def remove_book(self, book_id):
         if not self.bookRepository.delete(book_id): 
-            raise LookupError(f"Bood with id {book_id} not found.")
+            raise LookupError(f"Book with id {book_id} not found.")
+
+    def edit_book(self, book_id, title=None, author_id=None, publish_year=None,genre=None, pages=None):
+        if book_id is not None:
+            book=self.find_books(book_id)
+            if book is not None:
+                if title is not None and not title.strip():
+                    raise ValueError("Title cannot be blank.")
+                if publish_year is not None and publish_year <= 0:
+                    raise ValueError("Publish year must be positive.")
+                book = self.repository.update(book_id, title, author_id, publish_year, genre,pages)
+                return book
+
+            else: 
+                return "Book with book id {book_id} not found."
+        else:
+            return "Please provide a valid book id."   
+        
