@@ -14,7 +14,7 @@ def main():
     author_menu = AuthorMenu(author_service)
 
     book_repo = BookRepository()
-    book_service = BookService(book_repo,AuthorService)
+    book_service = BookService(book_repo,author_service)
     book_menu = BookMenu(book_service)
 
     while True:
